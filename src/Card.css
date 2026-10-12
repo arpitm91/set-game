@@ -1,0 +1,74 @@
+.set-card {
+    display: grid;
+    box-sizing: border-box;
+    width: var(--card-width, 100%);
+    height: auto;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: var(--card-aspect-ratio, 3 / 4);
+    align-self: center;
+    justify-self: center;
+    grid-template-columns: repeat(var(--symbol-columns, 1), minmax(0, 1fr));
+    grid-template-rows: repeat(var(--symbol-rows, 1), minmax(0, 1fr));
+    place-items: center;
+    gap: var(--symbol-gap, 6px);
+    padding: clamp(3px, 1.1vh, 16px);
+    border: 1px solid var(--card-border, #d5d8d1);
+    border-radius: 8px;
+    background-color: var(--card-surface, #fff);
+    box-shadow: var(--card-shadow, 0 5px 14px rgb(29 43 35 / 8%));
+    cursor: pointer;
+    transition: width 180ms ease, background-color var(--card-transition-duration, 850ms) ease, transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease, filter 450ms ease;
+}
+
+.set-card:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgb(0 0 0 / 14%);
+}
+
+.set-card:focus-visible {
+    outline: 3px solid var(--focus-ring, #273a32);
+    outline-offset: 3px;
+}
+
+.set-card--selected,
+.set-card--selected:hover:not(:disabled) {
+    transform: translateY(-5px);
+    border-color: var(--focus-ring, #273a32);
+    box-shadow: 0 0 0 3px var(--focus-ring, #273a32), 0 9px 18px rgb(0 0 0 / 18%);
+}
+
+.set-card--hinted,
+.set-card--hinted:hover:not(:disabled) {
+    outline: 3px solid var(--hint-accent, #bd751b);
+    outline-offset: 3px;
+}
+
+.set-card--obscured,
+.set-card--obscured:hover:not(:disabled) {
+    filter: blur(4px);
+    border-color: transparent;
+    box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .set-card--obscured {
+        transition-duration: 0.01ms;
+    }
+}
+
+.set-card:disabled {
+    cursor: default;
+}
+
+.set-card__symbol {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 100 / 42;
+    min-height: 0;
+    max-width: 100%;
+    max-height: 42px;
+    overflow: visible;
+}
